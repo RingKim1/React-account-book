@@ -6,8 +6,12 @@ const Section = styled.section`
   border-radius: 5px;
 `;
 
-const SelectMonth = ({ activeIndex, isClick }) => {
+const SelectMonth = ({ activeIndex, setActiveIndex }) => {
   const Month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  const isClick = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
     <Section>
