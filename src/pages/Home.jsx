@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectMonth from "../components/SelectMonth";
 import Form from "../components/Form";
 import DetailList from "../components/DetailList";
@@ -13,11 +13,28 @@ const Home = () => {
       content: "김치찌개",
     },
   ]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    Number(localStorage.getItem("index")) ?? 0
+  );
+
+  console.log(Number(localStorage.getItem("index")));
+  const isClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("index", activeIndex);
+    return () => {};
+  }, [activeIndex]);
+
+  // useEffect(() => {
+  //   setActiveIndex(Number(localStorage.getItem("index")));
+  //   return () => {};
+  // }, []);
 
   return (
     <>
-      <SelectMonth activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+      <SelectMonth activeIndex={activeIndex} isClick={isClick} />
       <Form setExpenses={setExpenses} />
       <DetailList
         expenses={expenses}

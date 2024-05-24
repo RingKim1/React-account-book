@@ -33,6 +33,22 @@ const DivContent = styled.div`
 const P = styled.p`
   background-color: transparent;
   margin: 5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+`;
+
+const P2 = styled.p`
+  background-color: transparent;
+  margin: 5px;
+  white-space: nowrap;
 `;
 const Span = styled.span`
   background-color: transparent;
@@ -48,7 +64,7 @@ const DetailItem = ({ expense, setExpenses }) => {
         <P>
           <Span>{expense.category}</Span> - {expense.content}
         </P>
-        <P>{expense.amount}원</P>
+        <P2>{expense.amount + `원`}</P2>
       </DivContent>
     </Li>
   );
