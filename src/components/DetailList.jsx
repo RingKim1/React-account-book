@@ -9,17 +9,23 @@ const Ul = styled.ul`
   flex-direction: column;
 `;
 
-const DetailList = ({ expenses, setExpenses }) => {
+const DetailList = ({ expenses, setExpenses, activeIndex }) => {
   return (
     <section>
       <Ul>
-        {expenses.map((expense) => (
-          <DetailItem
-            key={expense.id}
-            expense={expense}
-            setExpenses={setExpenses}
-          />
-        ))}
+        {expenses
+          // 해당 월에 해당하는 것만 걸러주는 필터
+          .filter(
+            (expense) =>
+              Number(expense.date[5] + expense.date[6]) === activeIndex + 1
+          )
+          .map((expense) => (
+            <DetailItem
+              key={expense.id}
+              expense={expense}
+              setExpenses={setExpenses}
+            />
+          ))}
       </Ul>
     </section>
   );

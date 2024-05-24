@@ -13,11 +13,17 @@ const Home = () => {
       content: "김치찌개",
     },
   ]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <>
-      <SelectMonth />
+      <SelectMonth activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       <Form setExpenses={setExpenses} />
-      <DetailList expenses={expenses} setExpenses={setExpenses} />
+      <DetailList
+        expenses={expenses}
+        setExpenses={setExpenses}
+        activeIndex={activeIndex}
+      />
     </>
   );
 };

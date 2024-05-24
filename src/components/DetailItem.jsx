@@ -34,6 +34,11 @@ const P = styled.p`
   background-color: transparent;
   margin: 5px;
 `;
+const Span = styled.span`
+  background-color: transparent;
+  color: orange;
+  font-weight: 800;
+`;
 
 const DetailItem = ({ expense, setExpenses }) => {
   return (
@@ -41,7 +46,7 @@ const DetailItem = ({ expense, setExpenses }) => {
       <DivDate>{expense.date}</DivDate>
       <DivContent>
         <P>
-          {expense.category} - {expense.content}
+          <Span>{expense.category}</Span> - {expense.content}
         </P>
         <P>{expense.amount}원</P>
       </DivContent>
