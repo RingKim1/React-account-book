@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import MonthBtn from "./MonthBtn";
+import { useEffect } from "react";
 
 const Section = styled.section`
   background-color: rgba(25, 100, 200, 0.4);
@@ -12,6 +13,13 @@ const SelectMonth = ({ activeIndex, setActiveIndex }) => {
   const isClick = (index) => {
     setActiveIndex(index);
   };
+
+  // activeIndex의 상태가 바뀌면 해당 값을 로컬 스토리지에 저장 후
+  // 클릭된 상태를 유지하기 위해
+  useEffect(() => {
+    localStorage.setItem("index", activeIndex);
+    return () => {};
+  }, [activeIndex]);
 
   return (
     <Section>

@@ -13,8 +13,12 @@ const StForm = styled.form`
   padding: 10px;
 `;
 
+const Button = styled.button`
+  cursor: pointer;
+`;
+
 const Form = ({ setExpenses }) => {
-  // 상태 값 관리
+  // 상태 관리
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
@@ -51,6 +55,15 @@ const Form = ({ setExpenses }) => {
   const addExpense = (e) => {
     e.preventDefault();
 
+    if (amount <= 0) {
+      alert("금액을 제대로 입력해 주세요");
+      return;
+    }
+
+    if (!category.trim() || !content.trim()) {
+      alert("항목 또는 내용을 입력해 주세요");
+      return;
+    }
     const newExpense = {
       id: uuidv4(),
       date,
@@ -72,7 +85,7 @@ const Form = ({ setExpenses }) => {
           type={el.type}
         />
       ))}
-      <button type="submit">저장</button>
+      <Button type="submit">저장</Button>
     </StForm>
   );
 };

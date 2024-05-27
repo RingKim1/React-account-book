@@ -12,6 +12,8 @@ const Button = styled.button`
   color: ${(props) => (props.$active ? "blue" : "black")};
   font-size: 1rem;
   font-weight: 600;
+
+  cursor: pointer;
 `;
 
 const MonthBtn = ({ Month, active, onClick }) => {
