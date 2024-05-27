@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Context } from "../contexts/ContextProvider";
 
 const Ul = styled.ul`
   background-color: rgba(25, 100, 200, 0.4);
@@ -32,6 +33,17 @@ const Input = styled.input`
   padding: 5px;
 `;
 
+const Input2 = styled.input`
+  background-color: white;
+  text-align: start;
+  color: black;
+  width: 500px;
+  height: 100px;
+
+  margin: 10px 0;
+  padding: 5px;
+`;
+
 const ButtonWrapper = styled.div`
   background-color: transparent;
   display: flex;
@@ -41,7 +53,9 @@ const ButtonWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const Detail = ({ expenses, setExpenses }) => {
+const Detail = () => {
+  const { expenses, setExpenses } = useContext(Context);
+
   const params = useParams();
   const item = expenses.find((el) => String(el.id) === params.id);
 
@@ -76,7 +90,7 @@ const Detail = ({ expenses, setExpenses }) => {
   };
 
   return (
-    <div>
+    <>
       <Ul>
         <Li>
           날짜
@@ -92,7 +106,7 @@ const Detail = ({ expenses, setExpenses }) => {
         </Li>
         <Li>
           내용
-          <Input placeholder={item.content} ref={contentRef}></Input>
+          <Input2 placeholder={item.content} ref={contentRef}></Input2>
         </Li>
         <ButtonWrapper>
           <button>
@@ -104,7 +118,7 @@ const Detail = ({ expenses, setExpenses }) => {
           </div>
         </ButtonWrapper>
       </Ul>
-    </div>
+    </>
   );
 };
 

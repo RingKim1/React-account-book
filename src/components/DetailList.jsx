@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import DetailItem from "./DetailItem";
 import NoItem from "./NoItem";
+import { useContext } from "react";
+import { Context } from "../contexts/ContextProvider";
 
 const Ul = styled.ul`
   background-color: rgba(25, 100, 200, 0.4);
@@ -10,7 +12,9 @@ const Ul = styled.ul`
   flex-direction: column;
 `;
 
-const DetailList = ({ expenses, setExpenses, activeIndex }) => {
+const DetailList = ({ activeIndex }) => {
+  const { expenses } = useContext(Context);
+
   const filteredExpenses = expenses
     // 해당 월에 해당하는 것만 걸러주는 필터
     .filter(

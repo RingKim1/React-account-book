@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import FormContent from "./FormContent";
+import { Context } from "../contexts/ContextProvider";
 
 const StForm = styled.form`
   background-color: rgba(25, 100, 200, 0.4);
@@ -17,12 +18,14 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Form = ({ setExpenses }) => {
+const Form = () => {
   // 상태 관리
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
   const [content, setContent] = useState("");
+
+  const { setExpenses } = useContext(Context);
 
   // 컴포넌트 분리를 위해 생성
   const FormContents = [

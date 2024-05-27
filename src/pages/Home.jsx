@@ -3,7 +3,7 @@ import SelectMonth from "../components/SelectMonth";
 import Form from "../components/Form";
 import DetailList from "../components/DetailList";
 
-const Home = ({ setExpenses, expenses }) => {
+const Home = () => {
   const [activeIndex, setActiveIndex] = useState(
     Number(localStorage.getItem("index")) ?? 0
   );
@@ -11,12 +11,8 @@ const Home = ({ setExpenses, expenses }) => {
   return (
     <>
       <SelectMonth activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-      <Form setExpenses={setExpenses} />
-      <DetailList
-        expenses={expenses}
-        setExpenses={setExpenses}
-        activeIndex={activeIndex}
-      />
+      <Form />
+      <DetailList activeIndex={activeIndex} />
     </>
   );
 };

@@ -1,10 +1,13 @@
 import React from "react";
 import Router from "./shared/Router";
+import ContextProvider from "./contexts/ContextProvider";
 
 function App() {
   return (
     <>
-      <Router />
+      <ContextProvider>
+        <Router />
+      </ContextProvider>
     </>
   );
 }
