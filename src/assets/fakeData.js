@@ -29,28 +29,28 @@ const fakeData = [
   },
   {
     id: "25600f72-99b4-41z7-e4h6-47312365e2f8",
-    date: "2024-02-02",
+    date: "2024-02-08",
     category: "간식",
     amount: 500,
     content: "아이스크림",
   },
   {
     id: "25143e72-16e2-22a7-a9c2-47358580e2f8",
-    date: "2024-02-02",
+    date: "2024-01-25",
     category: "여행",
     amount: 1055000,
     content: "일본여행",
   },
   {
     id: "25600f72-97p2-14a7-a9c2-47363950e2t8",
-    date: "2024-02-02",
+    date: "2024-02-20",
     category: "미용",
     amount: 155000,
     content: "미용실",
   },
   {
     id: "24312f70-97q2-14a7-a9c2-47132950e2t8",
-    date: "2024-02-02",
+    date: "2024-05-04",
     category: "도서",
     amount: 75000,
     content:
