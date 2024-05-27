@@ -14,6 +14,7 @@ const Input = styled.input`
 `;
 
 const FormContent = ({ FormContent, value, setValue, type }) => {
+  // 포커스
   // const focusRef = useRef(null);
 
   // useEffect(() => {

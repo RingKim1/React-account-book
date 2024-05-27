@@ -52,9 +52,6 @@ const Detail = ({ expenses, setExpenses }) => {
   const amountRef = useRef();
   const contentRef = useRef();
 
-  console.log("dateRef", dateRef, dateRef.current);
-  console.log("contentRef", contentRef, contentRef.current);
-
   const removeItem = () => {
     setExpenses((prev) => prev.filter((el) => String(el.id) !== params.id));
     navigate("/");

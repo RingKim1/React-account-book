@@ -11,20 +11,16 @@ const Ul = styled.ul`
 `;
 
 const DetailList = ({ expenses, setExpenses, activeIndex }) => {
+  const filteredExpenses = expenses
+    // 해당 월에 해당하는 것만 걸러주는 필터
+    .filter(
+      (expense) => Number(expense.date[5] + expense.date[6]) === activeIndex + 1
+    )
+    .map((expense) => <DetailItem key={expense.id} expense={expense} />);
+
   return (
     <section>
-      <Ul>
-        {/* NoItem 컴포넌트 출력 문제 */}
-        {expenses
-          // 해당 월에 해당하는 것만 걸러주는 필터
-          .filter(
-            (expense) =>
-              Number(expense.date[5] + expense.date[6]) === activeIndex + 1
-          )
-          .map((expense) => (
-            <DetailItem key={expense.id} expense={expense} />
-          )) || <NoItem />}
-      </Ul>
+      <Ul>{filteredExpenses.length === 0 ? <NoItem /> : filteredExpenses}</Ul>
     </section>
   );
 };
