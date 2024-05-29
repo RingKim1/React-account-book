@@ -1,7 +1,8 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Context } from "../contexts/ContextProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { modifyItem, removeItem } from "../redux/slices/expensesSlice";
 
 const Ul = styled.ul`
   background-color: rgba(25, 100, 200, 0.4);
@@ -54,11 +55,12 @@ const ButtonWrapper = styled.div`
 `;
 
 const Detail = () => {
-  const { expenses, setExpenses } = useContext(Context);
+  const expenses = useSelector((state) => state.expenses);
+  const dispatch = useDispatch();
 
   const params = useParams();
-  const item = expenses.find((el) => String(el.id) === params.id);
 
+  const item = expenses.find((el) => String(el.id) === params.id);
   const navigate = useNavigate();
 
   const dateRef = useRef();
@@ -66,27 +68,22 @@ const Detail = () => {
   const amountRef = useRef();
   const contentRef = useRef();
 
-  const removeItem = () => {
-    setExpenses((prev) => prev.filter((el) => String(el.id) !== params.id));
+  const payload = {
+    id: params.id,
+    dateRef: dateRef.current,
+    categoryRef: categoryRef.current,
+    amountRef: amountRef.current,
+    contentRef: contentRef.current,
+  };
+
+  const removeItemBtn = (id) => {
+    dispatch(removeItem(id));
     navigate("/");
   };
 
-  const modifyItem = () => {
-    setExpenses((prev) =>
-      prev.map((el) =>
-        String(el.id) === params.id
-          ? {
-              ...el,
-              date: dateRef.current.value || dateRef.current.placeholder,
-              category:
-                categoryRef.current.value || categoryRef.current.placeholder,
-              amount: amountRef.current.value || amountRef.current.placeholder,
-              content:
-                contentRef.current.value || contentRef.current.placeholder,
-            }
-          : el
-      )
-    );
+  // 수정 필요...
+  const modifyItemBtn = (payload) => {
+    dispatch(modifyItem(payload));
   };
 
   return (
@@ -113,8 +110,8 @@ const Detail = () => {
             <Link to={`/`}>Home</Link>
           </button>
           <div>
-            <button onClick={modifyItem}>수정</button>
-            <button onClick={removeItem}>삭제</button>
+            <button onClick={() => modifyItemBtn(payload)}>수정</button>
+            <button onClick={() => removeItemBtn(payload.id)}>삭제</button>
           </div>
         </ButtonWrapper>
       </Ul>

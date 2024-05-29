@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import FormContent from "./FormContent";
-import { Context } from "../contexts/ContextProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpense } from "../redux/slices/expensesSlice";
 
 const StForm = styled.form`
   background-color: rgba(25, 100, 200, 0.4);
@@ -25,7 +26,8 @@ const Form = () => {
   const [amount, setAmount] = useState(0);
   const [content, setContent] = useState("");
 
-  const { setExpenses } = useContext(Context);
+  const expenses = useSelector((state) => state.expenses);
+  const dispatch = useDispatch();
 
   // 컴포넌트 분리를 위해 생성
   const FormContents = [
@@ -55,7 +57,7 @@ const Form = () => {
     },
   ];
 
-  const addExpense = (e) => {
+  const addExpenseBtn = (e) => {
     e.preventDefault();
 
     if (amount <= 0) {
@@ -67,18 +69,18 @@ const Form = () => {
       alert("항목 또는 내용을 입력해 주세요");
       return;
     }
-    const newExpense = {
-      id: uuidv4(),
-      date,
-      category,
-      amount,
-      content,
-    };
-
-    setExpenses((prev) => [...prev, newExpense]);
+    dispatch(
+      addExpense({
+        id: uuidv4(),
+        date,
+        category,
+        amount,
+        content,
+      })
+    );
   };
   return (
-    <StForm onSubmit={addExpense}>
+    <StForm onSubmit={addExpenseBtn}>
       {FormContents.map((el) => (
         <FormContent
           key={el.name}
