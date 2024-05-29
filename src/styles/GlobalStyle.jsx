@@ -4,12 +4,15 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
-  background-color: #333;
+  background-color: transparent;
   color: white;
   
   text-align: center;
   justify-content: center;
   align-items: center;
+  }
+  body {
+    background-color: #333;
   }
 
   a {

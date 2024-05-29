@@ -11,8 +11,9 @@ const Ul = styled.ul`
   flex-direction: column;
 `;
 
-const DetailList = ({ activeIndex }) => {
+const DetailList = () => {
   const expenses = useSelector((state) => state.expenses);
+  const activeIndex = useSelector((state) => state.activeIndex);
 
   const filteredExpenses = expenses
     // 해당 월에 해당하는 것만 걸러주는 필터

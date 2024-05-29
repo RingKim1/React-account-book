@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { modifyItem, removeItem } from "../redux/slices/expensesSlice";
+import Swal from "sweetalert2";
 
 const Ul = styled.ul`
   background-color: rgba(25, 100, 200, 0.4);
@@ -68,20 +69,37 @@ const Detail = () => {
   const amountRef = useRef();
   const contentRef = useRef();
 
-  const payload = {
-    id: params.id,
-    dateRef: dateRef,
-    categoryRef: categoryRef,
-    amountRef: amountRef,
-    contentRef: contentRef,
-  };
-
+  console.log(dateRef);
   const removeItemBtn = (id) => {
-    dispatch(removeItem(id));
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeItem(id));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+        navigate("/");
+      }
+    });
   };
 
-  const modifyItemBtn = (payload) => {
+  const modifyItemBtn = () => {
+    const payload = {
+      id: params.id,
+      dateRef: dateRef.current.value,
+      categoryRef: categoryRef.current.value,
+      amountRef: amountRef.current.value,
+      contentRef: contentRef.current.value,
+    };
     dispatch(modifyItem(payload));
   };
 
@@ -90,7 +108,11 @@ const Detail = () => {
       <Ul>
         <Li>
           날짜
-          <Input defaultValue={item.date} ref={dateRef}></Input>
+          <Input
+            placeholder={`yyyy-mm-dd`}
+            defaultValue={item.date}
+            ref={dateRef}
+          ></Input>
         </Li>
         <Li>
           항목
@@ -109,8 +131,8 @@ const Detail = () => {
             <Link to={`/`}>Home</Link>
           </button>
           <div>
-            <button onClick={() => modifyItemBtn(payload)}>수정</button>
-            <button onClick={() => removeItemBtn(payload.id)}>삭제</button>
+            <button onClick={() => modifyItemBtn()}>수정</button>
+            <button onClick={() => removeItemBtn(params.id)}>삭제</button>
           </div>
         </ButtonWrapper>
       </Ul>

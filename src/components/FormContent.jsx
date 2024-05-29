@@ -9,6 +9,8 @@ const Div = styled.div`
 `;
 
 const Input = styled.input`
+  background-color: #333;
+
   border-radius: 5px;
   margin: 10px;
 `;
