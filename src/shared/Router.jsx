@@ -1,7 +1,6 @@
-import React from "react";
 import GlobalStyle from "../styles/GlobalStyle";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Detail from "../pages/Detail";
 
@@ -14,7 +13,7 @@ const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
           </Route>
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </>
