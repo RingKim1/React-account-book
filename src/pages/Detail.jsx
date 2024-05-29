@@ -70,10 +70,10 @@ const Detail = () => {
 
   const payload = {
     id: params.id,
-    dateRef: dateRef.current,
-    categoryRef: categoryRef.current,
-    amountRef: amountRef.current,
-    contentRef: contentRef.current,
+    dateRef: dateRef,
+    categoryRef: categoryRef,
+    amountRef: amountRef,
+    contentRef: contentRef,
   };
 
   const removeItemBtn = (id) => {
@@ -81,7 +81,6 @@ const Detail = () => {
     navigate("/");
   };
 
-  // 수정 필요...
   const modifyItemBtn = (payload) => {
     dispatch(modifyItem(payload));
   };
@@ -91,19 +90,19 @@ const Detail = () => {
       <Ul>
         <Li>
           날짜
-          <Input placeholder={item.date} ref={dateRef}></Input>
+          <Input defaultValue={item.date} ref={dateRef}></Input>
         </Li>
         <Li>
           항목
-          <Input placeholder={item.category} ref={categoryRef}></Input>
+          <Input defaultValue={item.category} ref={categoryRef}></Input>
         </Li>
         <Li>
           금액
-          <Input placeholder={item.amount} ref={amountRef}></Input>
+          <Input defaultValue={item.amount} ref={amountRef}></Input>
         </Li>
         <Li>
           내용
-          <Input2 placeholder={item.content} ref={contentRef}></Input2>
+          <Input2 defaultValue={item.content} ref={contentRef}></Input2>
         </Li>
         <ButtonWrapper>
           <button>
